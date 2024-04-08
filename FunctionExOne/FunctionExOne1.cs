@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using FunctionExOne.Abstract;
@@ -17,7 +18,11 @@ namespace FunctionExOne
 
         public int GetAllButLastDigit(int number)
         {
-            return (number /= 10);
+            if (number < 10)
+            {
+                return -1;
+            }
+            return (number / 10);
         }
 
         public int GetAmountOfDigits(int number)
@@ -37,8 +42,8 @@ namespace FunctionExOne
 
         public int GetDigintInIndex(int number, int index)
         {
-            string num = number.ToString();
-            return num[index];
+            number = number / (int) Math.Pow (10, index);
+            return GetLastDigit(number);
         }
     }
 }
